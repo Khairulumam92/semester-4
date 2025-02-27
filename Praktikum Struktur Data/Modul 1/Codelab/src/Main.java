@@ -1,4 +1,3 @@
-// Generic Container class
 class Container<T> {
     private T content;
 
