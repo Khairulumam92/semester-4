@@ -9,6 +9,7 @@ public class SearchBook {
         System.out.println("Masukkan nama pengarang : ");
         System.out.println("Masukkan harga : ");
         System.out.println("Pilih katageori buku : ");
+        System.out.println("0. NOVEL\n1. BIOGRAFI\n2. TEKNOLOGI\n3. ANAK");
 
         for (BookCategory category : BookCategory.values()) {
             System.out.println(category.ordinal() + ". " + category);
