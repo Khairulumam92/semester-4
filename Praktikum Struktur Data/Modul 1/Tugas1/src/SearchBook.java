@@ -1,26 +1,47 @@
+import java.util.Scanner;
+
 public class SearchBook {
-    enum BookCategory {
-        NOVEL, BIOGRAFI, TEKNOLOGI, ANAK
-    }
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("=== Pencarian Buku ===");
+            System.out.print("Masukkan judul buku: ");
+            String judul = scanner.nextLine();
 
-    public static void main(String[] args) throws Exception {
-        System.out.println("=== Pencarian Buku ===");
-        System.out.println("Masukkan judul buku : ");
-        System.out.println("Masukkan nama pengarang : ");
-        System.out.println("Masukkan harga : ");
-        System.out.println("Pilih katageori buku : ");
-        System.out.println("0. NOVEL\n1. BIOGRAFI\n2. TEKNOLOGI\n3. ANAK");
+            System.out.print("Masukkan nama pengarang: ");
+            String pengarang = scanner.nextLine();
 
-        for (BookCategory category : BookCategory.values()) {
-            System.out.println(category.ordinal() + ". " + category);
+            System.out.print("Masukkan harga: ");
+            double harga = scanner.nextDouble();
+            scanner.nextLine();
+
+            System.out.println("\nPilih kategori buku:");
+            System.out.println("0. NOVEL\n1. BIOGRAFI\n2. TEKNOLOGI\n3. ANAK");
+
+            System.out.print("\nMasukkan pilihan: ");
+            int pilihan = scanner.nextInt();
+            Kategori kategori;
+
+            switch (pilihan) {
+                case 0:
+                    kategori = Kategori.NOVEL;
+                    break;
+                case 1:
+                    kategori = Kategori.BIOGRAFI;
+                    break;
+                case 2:
+                    kategori = Kategori.TEKNOLOGI;
+                    break;
+                case 3:
+                    kategori = Kategori.ANAK;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Pilihan kategori tidak valid");
+            }
+
+            Buku<String, String> buku = new Buku<>(judul, pengarang, harga, kategori);
+
+            System.out.println("\n=== Informasi Buku ===");
+            buku.displayInfo();
         }
-
-        System.out.print("Masukkan pilihan : ");
-
-        System.out.println("=== Informasi Buku ===");
-        System.out.println("Judul : ");
-        System.out.println("Pengarang : ");
-        System.out.println("Harga : ");
-        System.out.println("Katageri : ");
     }
 }
