@@ -14,10 +14,11 @@ public class SearchBook {
             double harga = scanner.nextDouble();
             scanner.nextLine();
 
-            System.out.println("\nPilih kategori buku:");
+            System.out.println("===============");
+            System.out.println("Pilih kategori buku:");
             System.out.println("0. NOVEL\n1. BIOGRAFI\n2. TEKNOLOGI\n3. ANAK");
 
-            System.out.print("\nMasukkan pilihan: ");
+            System.out.print("Masukkan pilihan: ");
             int pilihan = scanner.nextInt();
             Kategori kategori;
 
@@ -42,6 +43,7 @@ public class SearchBook {
 
             System.out.println("\n=== Informasi Buku ===");
             buku.displayInfo();
+            System.out.println("===============");
         }
     }
 }
