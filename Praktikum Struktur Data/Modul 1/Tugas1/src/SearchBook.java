@@ -41,7 +41,7 @@ public class SearchBook {
 
             Buku<String, String> buku = new Buku<>(judul, pengarang, harga, kategori);
 
-            System.out.println("\n=== Informasi Buku ===");
+            System.out.println("=== Informasi Buku ===");
             buku.displayInfo();
             System.out.println("===============");
         }

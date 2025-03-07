@@ -28,9 +28,10 @@ public class Buku<T, U> {
     }
 
     public void displayInfo() {
+        System.out.println("==============");
         System.out.println("Judul: " + judul);
         System.out.println("Pengarang: " + pengarang);
-        System.out.println("Harga: " + harga);
+        System.out.printf("Harga: Rp %.2f\n", harga);
         System.out.println("Kategori: " + kategori);
     }
 }
