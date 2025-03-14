@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class LatinanArrayList {
+public class LatihanArrayList {
     public static void main(String[] args) {
         ArrayList<String> daftarBuah = new ArrayList<>();
 
