@@ -34,5 +34,6 @@ public class LatihanArrayList {
 
         System.out.println("Apakah ArrayList kosong? " + daftarBuah.isEmpty());
         System.out.println("Apakah ArrayList berisi 'Jeruk'? " + daftarBuah.contains("Jeruk"));
+        System.out.println("Apakah ArrayList berisi 'Pisang'? " + daftarBuah.contains("Pisang"));
     }
 }
