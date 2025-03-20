@@ -78,7 +78,6 @@ public class PerbandinganList {
         System.out.println("LinkedList : " + (endTime - startTime) + " ns");
         System.out.println();
 
-        // Garis pemisah
         System.out.println("--------------------------------------------------");
         System.out.println(" ANALISIS HASIL ");
         System.out.println("--------------------------------------------------");
