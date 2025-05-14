@@ -16,10 +16,9 @@ public class SistemInventarisTokoBuku {
     private static String loggedInUser = null;
     private static Scanner scanner = new Scanner(System.in);
 
-    // Menambahkan data user dan password yang sudah ada
     static {
-        users.put("hisyam.kamil", "password123");
-        userDetails.put("hisyam.kamil", new ArrayList<>(Arrays.asList("Muhammad Hisyam Kamil", "Jl. Tlogomas")));
+        users.put("khairul-umam", "password123");
+        userDetails.put("khairul-umam", new ArrayList<>(Arrays.asList("Khairul Umam", "Jl. Tegalgondo")));
 
         users.put("jane.doe", "securepass");
         userDetails.put("jane.doe", new ArrayList<>(Arrays.asList("Jane Doe", "Jl. Mawar")));

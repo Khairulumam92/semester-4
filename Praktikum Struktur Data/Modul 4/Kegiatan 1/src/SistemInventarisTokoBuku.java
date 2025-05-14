@@ -12,7 +12,6 @@ public class SistemInventarisTokoBuku {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        // Menambahkan beberapa buku awal
         inisialisasiDataBuku();
 
         System.out.println("Selamat Datang di Sistem Inventaris Toko Buku\n");
@@ -61,7 +60,6 @@ public class SistemInventarisTokoBuku {
     }
 
     private static void inisialisasiDataBuku() {
-        // Menambahkan beberapa buku awal ke inventaris
         inventaris.put("Laskar Pelangi", 50);
         hargaBuku.put("Laskar Pelangi", 85000.0);
         penulisBuku.put("Laskar Pelangi", "Andrea Hirata");
@@ -216,7 +214,7 @@ public class SistemInventarisTokoBuku {
             try {
                 System.out.print(prompt);
                 int input = scanner.nextInt();
-                scanner.nextLine(); // Membersihkan newline
+                scanner.nextLine();
                 if (input < 0) {
                     System.out.println("Masukkan angka positif!");
                     continue;
@@ -224,7 +222,7 @@ public class SistemInventarisTokoBuku {
                 return input;
             } catch (InputMismatchException e) {
                 System.out.println("Masukkan angka yang valid!");
-                scanner.nextLine(); // Membersihkan input yang tidak valid
+                scanner.nextLine();
             }
         }
     }
@@ -234,7 +232,7 @@ public class SistemInventarisTokoBuku {
             try {
                 System.out.print(prompt);
                 double input = scanner.nextDouble();
-                scanner.nextLine(); // Membersihkan newline
+                scanner.nextLine();
                 if (input < 0) {
                     System.out.println("Masukkan angka positif!");
                     continue;
@@ -242,7 +240,7 @@ public class SistemInventarisTokoBuku {
                 return input;
             } catch (InputMismatchException e) {
                 System.out.println("Masukkan angka yang valid!");
-                scanner.nextLine(); // Membersihkan input yang tidak valid
+                scanner.nextLine();
             }
         }
     }

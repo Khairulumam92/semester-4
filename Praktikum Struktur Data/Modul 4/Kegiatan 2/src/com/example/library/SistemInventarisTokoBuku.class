@@ -1,0 +1,265 @@
+// Source code is decompiled from a .class file using FernFlower decompiler.
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Scanner;
+
+public class SistemInventarisTokoBuku {
+   private static Map<String, Integer> inventaris = new HashMap();
+   private static Map<String, Double> hargaBuku = new HashMap();
+   private static Map<String, String> penulisBuku = new HashMap();
+   private static Map<String, String> users = new HashMap();
+   private static Map<String, ArrayList<String>> userDetails = new HashMap();
+   private static String loggedInUser = null;
+   private static Scanner scanner;
+
+   public SistemInventarisTokoBuku() {
+   }
+
+   private static void register() {
+      System.out.print("Masukkan Username: ");
+      String var0 = scanner.nextLine();
+      if (users.containsKey(var0)) {
+         System.out.println("Registrasi Gagal: Username sudah terdaftar.");
+      } else if (!var0.contains("@")) {
+         System.out.println("Registrasi Gagal: Username harus mengandung karakter '@'.");
+      } else {
+         System.out.print("Masukkan Password: ");
+         String var1 = scanner.nextLine();
+         if (var1.length() < 8) {
+            System.out.println("Registrasi Gagal: Password minimal 8 karakter.");
+         } else {
+            System.out.print("Masukkan Nama Lengkap: ");
+            String var2 = scanner.nextLine();
+            System.out.print("Masukkan Alamat: ");
+            String var3 = scanner.nextLine();
+            users.put(var0, var1);
+            userDetails.put(var0, new ArrayList(Arrays.asList(var2, var3)));
+            System.out.println("Registrasi Berhasil!");
+         }
+      }
+   }
+
+   private static void login() {
+      System.out.print("Masukkan Username: ");
+      String var0 = scanner.nextLine();
+      System.out.print("Masukkan Password: ");
+      String var1 = scanner.nextLine();
+      if (users.containsKey(var0) && ((String)users.get(var0)).equals(var1)) {
+         loggedInUser = var0;
+         ArrayList var2 = (ArrayList)userDetails.get(var0);
+         System.out.println("Login Berhasil!");
+         System.out.println("Nama Lengkap: " + (String)var2.get(0));
+         System.out.println("Alamat: " + (String)var2.get(1));
+      } else {
+         System.out.println("Login Gagal!");
+      }
+
+   }
+
+   private static void logout() {
+      loggedInUser = null;
+      System.out.println("Logout Berhasil!");
+   }
+
+   private static void lihatLaporanInventaris() {
+      if (loggedInUser == null) {
+         System.out.println("Akses ditolak. Silakan login terlebih dahulu.");
+      } else {
+         System.out.println("\nLaporan Inventaris:");
+         lihatDaftarBuku();
+         PrintStream var10000 = System.out;
+         ArrayList var10001 = (ArrayList)userDetails.get(loggedInUser);
+         var10000.println("User yang login: " + (String)var10001.get(0));
+      }
+   }
+
+   private static void tampilkanMenuUtama() {
+      System.out.println("\nPilih Menu:");
+      System.out.println("1. Register");
+      System.out.println("2. Login");
+      System.out.println("3. Keluar");
+      System.out.print("\nPilihan Anda: ");
+   }
+
+   private static void tampilkanMenuSetelahLogin() {
+      System.out.println("\nPilih Menu:");
+      System.out.println("1. Tambah Buku Baru");
+      System.out.println("2. Lihat Daftar Buku");
+      System.out.println("3. Cari Buku");
+      System.out.println("4. Tambah Stok Buku");
+      System.out.println("5. Hapus Buku");
+      System.out.println("6. Perbarui Harga Buku");
+      System.out.println("7. Perbarui Penulis Buku");
+      System.out.println("8. Lihat Laporan Inventaris");
+      System.out.println("9. Logout");
+      System.out.print("\nPilihan Anda: ");
+   }
+
+   private static void inisialisasiDataBuku() {
+      inventaris.put("Laskar Pelangi", 50);
+      hargaBuku.put("Laskar Pelangi", 85000.0);
+      penulisBuku.put("Laskar Pelangi", "Andrea Hirata");
+      inventaris.put("Bumi Manusia", 30);
+      hargaBuku.put("Bumi Manusia", 95000.0);
+      penulisBuku.put("Bumi Manusia", "Pramoedya Ananta");
+      inventaris.put("Harry Potter dan Batu Bertuah", 100);
+      hargaBuku.put("Harry Potter dan Batu Bertuah", 120000.0);
+      penulisBuku.put("Harry Potter dan Batu Bertuah", "J.K. Rowling");
+      inventaris.put("The Hobbit", 40);
+      hargaBuku.put("The Hobbit", 110000.0);
+      penulisBuku.put("The Hobbit", "J.R.R. Tolkien");
+      inventaris.put("Dilan 1990", 60);
+      hargaBuku.put("Dilan 1990", 75000.0);
+      penulisBuku.put("Dilan 1990", "Pidi Baiq");
+   }
+
+   private static void tambahBukuBaru() {
+      System.out.print("Masukkan Judul Buku: ");
+      String var0 = scanner.nextLine();
+      if (inventaris.containsKey(var0)) {
+         System.out.println("Buku sudah ada dalam inventaris!");
+      } else {
+         System.out.print("Masukkan Nama Penulis: ");
+         String var1 = scanner.nextLine();
+         int var2 = getValidIntegerInput("Masukkan Jumlah Stok: ");
+         double var3 = getValidDoubleInput("Masukkan Harga Buku: ");
+         inventaris.put(var0, var2);
+         hargaBuku.put(var0, var3);
+         penulisBuku.put(var0, var1);
+         System.out.println("Buku berhasil ditambahkan!");
+      }
+   }
+
+   private static void lihatDaftarBuku() {
+      if (inventaris.isEmpty()) {
+         System.out.println("Inventaris kosong.");
+      } else {
+         System.out.println("\nDaftar Buku:");
+         System.out.println("=================================================================================");
+         System.out.printf("| %-30s | %-20s | %-6s | %-12s |\n", "Judul", "Penulis", "Stok", "Harga");
+         System.out.println("=================================================================================");
+         Iterator var0 = inventaris.keySet().iterator();
+
+         while(var0.hasNext()) {
+            String var1 = (String)var0.next();
+            System.out.printf("| %-30s | %-20s | %-6d | Rp%,-10.2f |\n", var1, penulisBuku.get(var1), inventaris.get(var1), hargaBuku.get(var1));
+         }
+
+         System.out.println("=================================================================================");
+      }
+   }
+
+   private static void cariBuku() {
+      System.out.print("Masukkan Judul Buku yang Dicari: ");
+      String var0 = scanner.nextLine();
+      if (!inventaris.containsKey(var0)) {
+         System.out.println("Buku tidak ditemukan!");
+      } else {
+         System.out.println("\nDetail Buku:");
+         System.out.println("Judul   : " + var0);
+         System.out.println("Penulis : " + (String)penulisBuku.get(var0));
+         System.out.printf("Stok    : %d\n", inventaris.get(var0));
+         System.out.printf("Harga   : Rp%,.2f\n", hargaBuku.get(var0));
+      }
+   }
+
+   private static void tambahStokBuku() {
+      System.out.print("Masukkan Judul Buku yang Akan Ditambah Stoknya: ");
+      String var0 = scanner.nextLine();
+      if (!inventaris.containsKey(var0)) {
+         System.out.println("Buku tidak ditemukan!");
+      } else {
+         int var1 = getValidIntegerInput("Masukkan Jumlah Stok yang Akan Ditambahkan: ");
+         inventaris.put(var0, (Integer)inventaris.get(var0) + var1);
+         System.out.println("Stok buku berhasil diperbarui!");
+      }
+   }
+
+   private static void hapusBuku() {
+      System.out.print("Masukkan Judul Buku yang Akan Dihapus: ");
+      String var0 = scanner.nextLine();
+      if (inventaris.remove(var0) == null) {
+         System.out.println("Buku tidak ditemukan!");
+      } else {
+         hargaBuku.remove(var0);
+         penulisBuku.remove(var0);
+         System.out.println("Buku berhasil dihapus!");
+      }
+   }
+
+   private static void perbaruiHargaBuku() {
+      System.out.print("Masukkan Judul Buku yang Akan Diperbarui Harganya: ");
+      String var0 = scanner.nextLine();
+      if (!hargaBuku.containsKey(var0)) {
+         System.out.println("Buku tidak ditemukan!");
+      } else {
+         double var1 = getValidDoubleInput("Masukkan Harga Baru: ");
+         hargaBuku.put(var0, var1);
+         System.out.println("Harga buku berhasil diperbarui!");
+      }
+   }
+
+   private static void perbaruiPenulisBuku() {
+      System.out.print("Masukkan Judul Buku yang Akan Diperbarui Penulisnya: ");
+      String var0 = scanner.nextLine();
+      if (!penulisBuku.containsKey(var0)) {
+         System.out.println("Buku tidak ditemukan!");
+      } else {
+         System.out.print("Masukkan Nama Penulis Baru: ");
+         String var1 = scanner.nextLine();
+         penulisBuku.put(var0, var1);
+         System.out.println("Penulis buku berhasil diperbarui!");
+      }
+   }
+
+   private static int getValidIntegerInput(String var0) {
+      while(true) {
+         try {
+            System.out.print(var0);
+            int var1 = scanner.nextInt();
+            scanner.nextLine();
+            if (var1 >= 0) {
+               return var1;
+            }
+
+            System.out.println("Masukkan angka positif!");
+         } catch (InputMismatchException var2) {
+            System.out.println("Masukkan angka yang valid!");
+            scanner.nextLine();
+         }
+      }
+   }
+
+   private static double getValidDoubleInput(String var0) {
+      while(true) {
+         try {
+            System.out.print(var0);
+            double var1 = scanner.nextDouble();
+            scanner.nextLine();
+            if (!(var1 < 0.0)) {
+               return var1;
+            }
+
+            System.out.println("Masukkan angka positif!");
+         } catch (InputMismatchException var3) {
+            System.out.println("Masukkan angka yang valid!");
+            scanner.nextLine();
+         }
+      }
+   }
+
+   static {
+      scanner = new Scanner(System.in);
+      users.put("khairul-umam", "password123");
+      userDetails.put("khairul-umam", new ArrayList(Arrays.asList("Khairul Umam", "Jl. Tegalgondo")));
+      users.put("jane.doe", "securepass");
+      userDetails.put("jane.doe", new ArrayList(Arrays.asList("Jane Doe", "Jl. Mawar")));
+      users.put("john.smith", "mypassword");
+      userDetails.put("john.smith", new ArrayList(Arrays.asList("John Smith", "Jl. Melati")));
+   }
+}
