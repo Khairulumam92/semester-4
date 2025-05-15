@@ -48,13 +48,15 @@ public class BinaryTree {
         tree.root.left.right = new Node(62);
         tree.root.right.left = new Node(28);
 
-        System.out.println("Preorder traversal:");
+        System.out.println("==== Binary Tree ====");
+
+        System.out.println("Preorder :");
         tree.preOrder(tree.root);
 
-        System.out.println("\nInorder traversal:");
+        System.out.println("\nInorder :");
         tree.inOrder(tree.root);
 
-        System.out.println("\nPostorder traversal:");
+        System.out.println("\nPostorder :");
         tree.postOrder(tree.root);
     }
 
